@@ -481,4 +481,3 @@ module STLC-CBV where
             v=v₀ = determinacy C[e]⇓v (fst (V-value V) , transport (λ □ → □ ↦* v₀) (! subst-id) sC[e]⇓v₀)
             v₀=v' : v₀ == v'
             v₀=v' = V-bool-equal V
-
