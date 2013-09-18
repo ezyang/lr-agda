@@ -89,8 +89,8 @@ module STLC-CBN where
       bwd-red* (lifts Step/if-cond e₁↦*z) (bwd-red Step/if-true (fund e₂ γ⊨Γ))
     fund (if e₁ then e₂ else e₃) γ⊨Γ | (.#f , Value/false , e₁↦*z) , <> =
       bwd-red* (lifts Step/if-cond e₁↦*z) (bwd-red Step/if-false (fund e₃ γ⊨Γ))
-    fund (v i0) γ⊨Γ = snd γ⊨Γ
-    fund (v (iS x)) γ⊨Γ = fund (v x) (fst γ⊨Γ)
+    fund (var i0) γ⊨Γ = snd γ⊨Γ
+    fund (var (iS x)) γ⊨Γ = fund (var x) (fst γ⊨Γ)
     fund {γ = γ} (lam {τ2 = τ₂} e) γ⊨Γ = (lam (subst (addvar γ) e) , Value/lam , Done) , λ e₁ WNτ₁[e₁] →
       let IH = fund e (γ⊨Γ , WNτ₁[e₁])
       in bwd-red Step/β (transport (WN τ₂) (subst-compose1 γ e₁ e) IH)
