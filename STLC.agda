@@ -5,10 +5,8 @@ The simply typed lambda calculus in Agda.
 
 This particular implementation was developed by Dan Licata for
 OPLSS 2013.  The method for "correct-by-construction" lambda terms
-is standard, but we also provide some important lemmas about
-substitutions and renamings that are quite important when
-reasoning about operational semantics, and frequently omitted from
-most presentations about STLC.
+is standard, and the method for proving the lemmas about substitutions
+is described in "Strongly Typed Term Representations in Coq".
 -}
 module STLC where
 

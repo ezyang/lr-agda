@@ -85,9 +85,16 @@ module STLC-CBV where
     det-↦ (Step/app2 s1) (Step/app2 s2) = ap (λ y → app _ y) (det-↦ s1 s2)
     det-↦ (Step/if-cond s1) (Step/if-cond s2) = ap (λ y → if y then _ else _) (det-↦ s1 s2)
 
-    -- Agda bugs?
     determinacy : {e v₁ v₂ : [] ⊢ bool} → e ⇓ v₁ → e ⇓ v₂ → v₁ == v₂
-    determinacy x x' = {!!}
+    determinacy (_ , Done) (_ , Done) = Refl
+    determinacy (Value/true , Done) (_ , Step (Step/here ()) _)
+    determinacy (Value/false , Done) (_ , Step (Step/here ()) _)
+    determinacy (_ , Step (Step/here ()) _) (Value/true , Done)
+    determinacy (_ , Step (Step/here ()) _) (Value/false , Done)
+    determinacy (_ , Step (Step/app1 _) _) (() , Done)
+    determinacy (_ , Step (Step/app2 _) _) (() , Done)
+    determinacy (_ , Step (Step/if-cond _) _) (() , Done)
+    determinacy (fst , Step x snd) (fst₁ , Step x₁ snd₁) = determinacy (fst , snd) (transport (λ □ → □ ⇓ _) (! (det-↦ x x₁)) (fst₁ , snd₁))
 
   module WeakNormalizationCBV where
 
