@@ -1,11 +1,9 @@
 open import Preliminaries
 open import STLC
 open import STLC-CBV
+open import STLC-CBV-Equivalence
 
 module STLC-CBV-Ex where
-
-  open OpSemCBV
-  open EquivCBV
 
   module Ex1 where
 
