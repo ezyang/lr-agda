@@ -206,6 +206,11 @@ module STLC-CBV-Equivalence where
   fund (lam e) = compat-lam e e (fund e)
   fund (app e e₁) = compat-app e e e₁ e₁ (fund e) (fund e₁)
 
+  -- Just ignore the right-hand-side...
+  normalization : {τ : Tp} → (e : [] ⊢ τ) -> e ⇓
+  normalization e with fund e <> <> <>
+  normalization e | v , _ , e↦*v , _ , V = v , fst (V-value V) , transport (λ e' → e' ↦* v) (! subst-id) e↦*v
+
   -- as in C
   -- apparently for technical reasons it is more convenient
   -- to build in weakening; perhaps we will see why later...
